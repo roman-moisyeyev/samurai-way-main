@@ -1,0 +1,13 @@
+
+.item{
+color: blanchedalmond;
+}
+.item.active{
+color: peachpuff;
+}
+.item img {
+    width: 50px;
+    height: 60px;
+    border-radius: 30px;
+
+}
