@@ -1,0 +1,15 @@
+.content {
+    grid-area: c;
+    background-color: lightsteelblue;
+
+}
+
+.item{
+color: blanchedalmond;
+}
+.item.active{
+color: peachpuff;
+}
+.posts{
+    color: antiquewhite;
+}
