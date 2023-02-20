@@ -1,16 +1,20 @@
 import React from "react";
 import {Post} from "./Post/Post";
+import classes from './MyPosts.module.css'
+
 
 export const MyPosts =()=>{
 
     return(
 
-            <div>
-                MY POSTS
+            <div className={classes.descriptionBlock}>
+                <h3>MY POSTS</h3>
                 <div>
-                    <textarea ></textarea>
-                    <button>add post</button>
-                    <button>remove</button>
+                    <div><textarea ></textarea></div>
+                    <div><button>add post</button></div>
+                    <div> <button>remove</button></div>
+
+
                 </div>
                 <div className='posts'>
                    <Post message={'Hi, how are you?'} likeCount={4}/>
