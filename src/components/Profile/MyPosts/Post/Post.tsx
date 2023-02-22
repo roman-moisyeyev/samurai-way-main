@@ -4,6 +4,7 @@ import {findAllByDisplayValue} from "@testing-library/react";
 
 
 type PostPropsType={
+    id:number
     message:string
     likeCount:number
 }

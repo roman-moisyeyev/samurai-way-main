@@ -3,26 +3,33 @@ import {Post} from "./Post/Post";
 import classes from './MyPosts.module.css'
 
 
-export const MyPosts =()=>{
+export const MyPosts = () => {
+    let postsData = [
+        {id: 1, name: "Roman", likeCount: 4},
+        {id: 2, name: "Oleg", likeCount: 5},
 
-    return(
+    ]
+    return (
 
-            <div className={classes.descriptionBlock}>
-                <h3>MY POSTS</h3>
+        <div className={classes.descriptionBlock}>
+            <h3>MY POSTS</h3>
+            <div>
+                <div><textarea></textarea></div>
                 <div>
-                    <div><textarea ></textarea></div>
-                    <div><button>add post</button></div>
-                    <div> <button>remove</button></div>
+                    <button>add post</button>
+                </div>
+                <div>
+                    <button>remove</button>
+                </div>
 
 
-                </div>
-                <div className='posts'>
-                   <Post message={'Hi, how are you?'} likeCount={4}/>
-                   <Post message={'What are you doing?'} likeCount={3}/>
-                   <Post message={'Call to me,please!'} likeCount={5}/>
-                   <Post message={'Hmm... :( '} likeCount={2}/>
-                </div>
             </div>
+            <div className='posts'>
+                <Post id={postsData[0].id} message={postsData[0].name} likeCount={postsData[0].likeCount}/>
+                <Post id={postsData[1].id} message={postsData[1].name} likeCount={postsData[1].likeCount}/>
+
+            </div>
+        </div>
 
     )
 }
