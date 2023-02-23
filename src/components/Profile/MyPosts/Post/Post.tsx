@@ -1,10 +1,9 @@
 import React from "react";
 import classes from './Post.module.css'
-import {findAllByDisplayValue} from "@testing-library/react";
+
 
 
 type PostPropsType={
-    id:number
     message:string
     likeCount:number
 }

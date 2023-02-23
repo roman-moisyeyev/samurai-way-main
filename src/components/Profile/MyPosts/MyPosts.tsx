@@ -5,15 +5,14 @@ import classes from './MyPosts.module.css'
 
 export const MyPosts = () => {
     let posts = [
-        {id: 1, message: "Congrat!! Good page!", likeCount: 44},
-        {id: 2, message: " Good day!", likeCount: 144},
-        {id: 3, message: "Wow!", likeCount: 15},
+        {id: 1, message: "Congrat!! Good page!" , likeCount: 44},
+        {id: 3,message: "Wow!", likeCount: 15},
         {id: 4, message: "Hello guys!!", likeCount: 25},
         {id: 5, message: "Yo!", likeCount: 51},
 
     ]
 
-    let postsElements = posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>)
+    let postsElements = posts.map(post=><Post   message={post.message} likeCount={post.likeCount}/>)
     return (
 
         <div className={classes.descriptionBlock}>
