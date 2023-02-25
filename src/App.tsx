@@ -9,7 +9,33 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 
-const App = () => {
+type AppPropsType = {
+    posts: PostType[],
+    dialogs: DialogItemType[],
+    messages:MessageType[]
+}
+
+export type PostType = {
+    id: number,
+    message: string,
+    likeCount: number
+}
+
+export type DialogItemType = {
+    name: string
+    id: number
+}
+
+export type MessageType = {
+    id: number
+    message: string
+}
+
+
+
+
+
+    const App = (props: AppPropsType) =>{
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -18,19 +44,19 @@ const App = () => {
                 <Navbar/>
                 <div className="app-wrapper-content">
 
-                    <Route path='/dialogs' render={  () => <Dialogs/>}/>
-                        <Route path='/profile' render={  () => <Profile/>}/>
-                        <Route path='/news' component={News}/>
-                        <Route path='/music' component={Music}/>
-                        <Route path='/settings' component={Settings}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                    <Route path='/profile' render={() => <Profile posts={props.posts}/>}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/settings' component={Settings}/>
 
-                        </div>
-
-
-                        </div>
-                        </BrowserRouter>
-                        );
-                    }
+                </div>
 
 
-                           export default App;
+            </div>
+        </BrowserRouter>
+    );
+}
+
+
+export default App;
