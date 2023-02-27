@@ -1,13 +1,14 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import classes from './MyPosts.module.css'
-import {PostType} from "../../../App";
+import {PostType} from "../../../redux/state";
 
 
-type MyPostsPropsType = {
-    posts: PostType[]
+type MyPostsPropsType={
+    posts:PostType[]
 }
-export const MyPosts = (props: MyPostsPropsType) => {
+
+export const MyPosts = (props:MyPostsPropsType) => {
 
 
     let postsElements = props.posts.map(element => <Post post={element}/>)
