@@ -4,22 +4,28 @@ import classes from './MyPosts.module.css'
 import {PostType} from "../../../redux/state";
 
 
-type MyPostsPropsType={
-    posts:PostType[]
+type MyPostsPropsType = {
+    posts: PostType[]
 }
 
-export const MyPosts = (props:MyPostsPropsType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
+    let newPostElement= React.createRef()
 
+    const addPost = () => {
+       let text=newPostElement.current.value
+        alert(text)
+    }
 
     let postsElements = props.posts.map(element => <Post post={element}/>)
     return (
 
+
         <div className={classes.descriptionBlock}>
             <h3>MY POSTS</h3>
             <div>
-                <div><textarea></textarea></div>
+                <div><textarea ref={newPostElement}></textarea></div>
                 <div>
-                    <button>add post</button>
+                    <button onClick={addPost}>add post</button>
                 </div>
                 <div>
                     <button>remove</button>
