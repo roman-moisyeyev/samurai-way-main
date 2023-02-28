@@ -13,7 +13,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addPost = () => {
        let text=newPostElement.current.value
-        alert(text)
+       props.addPost(text)
     }
 
     let postsElements = props.posts.map(element => <Post post={element}/>)
