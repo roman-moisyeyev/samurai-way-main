@@ -1,3 +1,7 @@
+let rerenderEntireTree= (state:RootStateType)=>{
+    console.log('state was changed')
+}
+
 export type PostType = {
     id: number,
     message: string,
@@ -12,10 +16,13 @@ export type  DialogType = {
 export  type MessageType = {
     id: number
     message: string
+
 }
 
 export type ProfilePageType ={
-    posts:PostType[]
+    posts:PostType[],
+    newPostText:string
+
 }
 
 export  type DialogPageType ={
@@ -26,19 +33,20 @@ export  type DialogPageType ={
 export type RootStateType ={
     profilePage:ProfilePageType
     dialogsPage:DialogPageType
+
 }
 
 let state = {
     profilePage:{
         posts: [
-            {id: 1, message: "Congrat!! Good page!", likeCount: 44},
+            {id: 1, message: "Congrats!! Good page!", likeCount: 44},
+            {id: 2, message: "It\'s!! Good page!", likeCount: 23},
             {id: 3, message: "Wow!", likeCount: 15},
-            // {id: 4, message: "Hello guys!!", likeCount: 25},
-            // {id: 5, message: "Yo!", likeCount: 51},
-            // {id: 6, message: "Yo,Man!!", likeCount: 8},
-            // {id: 7, message: "ABYRVALG!", likeCount: 32},
-            // {id:5, message:"Lets GO!", likeCount: 6},
-        ]},
+
+        ],
+        newPostText:''
+
+    },
     dialogsPage:{
         dialogs:[
             {id:1, name:"Roman"},
@@ -59,13 +67,26 @@ let state = {
     }
 }
 
-export let addPost=(postMessage)=>{
-    let newPost ={
-        id:5,
-        message:postMessage,
+export const addPost=(postMessage:string)=>{
+
+    let newPost:{id: number, message: string, likeCount: number } ={
+        id:new Date().getTime(),
+        message:state.profilePage.newPostText,
         likeCount:0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText=''
+
+    rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText:string)=>{
+    state.profilePage.newPostText=newText
+    rerenderEntireTree(state)
+}
+
+export const subscribe = (observer:any)=>{
+    rerenderEntireTree=observer
 }
 
 export default state
