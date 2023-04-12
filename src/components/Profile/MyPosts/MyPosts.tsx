@@ -4,28 +4,31 @@ import classes from './MyPosts.module.css'
 import {ActionsTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../redux/state";
 
 
+
+
 type MyPostsPropsType = {
     posts: PostType[]
-    newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    newPostText:string
+    dispatch:(action:ActionsTypes)=>void
 }
 
 
+
 export const MyPosts = (props: MyPostsPropsType) => {
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    let newPostElement= React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        if (newPostElement.current) {
+        if(newPostElement.current){
             props.dispatch(addPostAC(props.newPostText))
 
         }
 
     }
 
-    const onPostChange = () => {
+    const onPostChange=()=>{
 
         // @ts-ignore
-        let text = newPostElement.current.value
+        let text= newPostElement.current.value
         props.dispatch(updateNewPostTextAC(text))
 
     }
@@ -37,7 +40,8 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <div className={classes.descriptionBlock}>
             <h3>MY POSTS</h3>
             <div>
-                <div><textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}/></div>
+                <div><textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}
+                               placeholder='Enter your post'/></div>
                 <div>
                     <button onClick={addPost}>add post</button>
                 </div>
