@@ -7,19 +7,17 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {RootStateType} from "./redux/state";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {addPost} from "./redux/state";
 
 
 type AppPropsType = {
-    state: RootStateType
-    addPost: (postMessage: string) => void
-    updateNewPostText:(newText:string)=>void
+    store:StoreType
 }
 
 
-const App = (props: AppPropsType) => {
+const App = (props:AppPropsType ) => {
+
+    const state=store.getState()
     return (
 
         <div className="app-wrapper">
@@ -28,12 +26,12 @@ const App = (props: AppPropsType) => {
             <Navbar/>
             <div className="app-wrapper-content">
 
-                <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                              messages={props.state.dialogsPage.messages}/>}/>
-                <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts}
-                                                              newPostText={props.state.profilePage.newPostText}
-                                                              addPost={addPost}
-                                                              updateNewPostText={props.updateNewPostText}
+                <Route path='/dialogs' render={() => <Dialogs dialogs={state.dialogsPage.dialogs}
+                                                              messages={state.dialogsPage.messages}/>}/>
+                <Route path='/profile' render={() => <Profile posts={state.profilePage.posts}
+                                                              newPostText={state.profilePage.newPostText}
+                                                              dispatch={props.store.dispatch.bind(store)}
+
                 />}/>
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
