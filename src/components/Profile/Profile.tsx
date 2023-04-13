@@ -17,7 +17,7 @@ export const Profile =(props:ProfilePropsType)=>{
     return(
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store} />
+            <MyPostsContainer />
         </div>
 
     )

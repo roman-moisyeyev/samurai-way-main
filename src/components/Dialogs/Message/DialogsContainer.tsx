@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import {Dialogs} from "../Dialogs";
 import {StoreType} from "../../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../../redux/dialogs-reducer";
+import StoreContext from "../../../StoreContext";
 
 
 type DialogsPropsType = {
@@ -10,19 +11,32 @@ type DialogsPropsType = {
 
 export const DialogsContainer = (props: DialogsPropsType) => {
 
-    let state=props.store.getState().dialogsPage
+    return <StoreContext.Consumer>
+        {
+        (store)=>{
+
+            // @ts-ignore
+            let state = store.getState().dialogsPage
+
+            let onSendMessageClick = () => {
+                // @ts-ignore
+                store.dispatch(sendMessageAC())
+            }
+            let onNewMessageChange = (body:string) => {
+                // @ts-ignore
+                store.dispatch(updateNewMessageBodyAC(body))
+            }
 
 
-    let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageAC())
+
+            return <Dialogs updateNewMessageBody={onNewMessageChange}
+                     sendMessage={onSendMessageClick}
+                     dialogsPage={state} />
+        }
     }
-    let onNewMessageChange = (body:string) => {
-        props.store.dispatch(updateNewMessageBodyAC(body))
-    }
 
-    return (
-        <Dialogs updateNewMessageBody={onNewMessageChange}
-                 sendMessage={onSendMessageClick}
-                 dialogsPage={state} />
-    )
+
+    </StoreContext.Consumer>
+
+
 }
