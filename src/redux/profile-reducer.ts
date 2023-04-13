@@ -1,4 +1,16 @@
-import {ProfilePageType} from "./state";
+type ProfileInitialStateType={
+
+}
+
+let initialState={
+    posts: [
+        {id: 1, message: "Congrats!! Good page!", likeCount: 44},
+        {id: 2, message: "It\'s!! Good page!", likeCount: 23},
+
+    ],
+    newPostText: ''
+}
+
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -7,7 +19,7 @@ type AddPostActionType = ReturnType<typeof addPostAC>
 type UpgradeNewPostTextType = ReturnType<typeof updateNewPostTextAC>
 export type ProfileReducerType=AddPostActionType | UpgradeNewPostTextType
 
-export const profileReducer= (state:ProfilePageType,action:ProfileReducerType)=>{
+export const profileReducer= (state=initialState,action:ProfileReducerType)=>{
     switch (action.type) {
         case ADD_POST:
             let newPost: { id: number, message: string, likeCount: number } = {

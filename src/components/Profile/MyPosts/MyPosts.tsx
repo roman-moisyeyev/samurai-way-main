@@ -1,7 +1,7 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import classes from './MyPosts.module.css'
-import {ActionsTypes,PostType} from "../../../redux/state";
+import {ActionsTypes,PostType} from "../../../redux/store";
 import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 
 
@@ -10,27 +10,26 @@ import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText:string
-    dispatch:(action:ActionsTypes)=>void
+    updateNewPostText:(text:string)=>void
+    addPost:()=>void
+    //dispatch:(action:ActionsTypes)=>void
 }
 
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
+
     let newPostElement= React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
-        if(newPostElement.current){
-            props.dispatch(addPostAC(props.newPostText))
-
-        }
-
+    const onAddPost = () => {
+            props.addPost()
     }
 
     const onPostChange=()=>{
 
         // @ts-ignore
         let text= newPostElement.current.value
-        props.dispatch(updateNewPostTextAC(text))
+        props.updateNewPostText(text)
 
     }
 
@@ -44,7 +43,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 <div><textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}
                                placeholder='Enter your post'/></div>
                 <div>
-                    <button onClick={addPost}>add post</button>
+                    <button onClick={onAddPost}>add post</button>
                 </div>
                 <div>
                     <button>remove</button>
