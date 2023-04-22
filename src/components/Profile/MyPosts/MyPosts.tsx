@@ -1,41 +1,37 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import classes from './MyPosts.module.css'
-import {ActionsTypes,PostType} from "../../../redux/store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
-
-
+import {ActionsTypes, PostType} from "../../../redux/1store";
 
 
 type MyPostsPropsType = {
     posts: PostType[]
-    newPostText:string
-    updateNewPostText:(text:string)=>void
-    addPost:()=>void
-    //dispatch:(action:ActionsTypes)=>void
+    newPostText: string
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
-
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    let newPostElement= React.createRef<HTMLTextAreaElement>()
+    let postsElements = props.posts.map(p => <Post post={p} key={p.id}/>)
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const onAddPost = () => {
-            props.addPost()
+        props.addPost()
     }
 
-    const onPostChange=()=>{
+    const onPostChange = () => {
 
         // @ts-ignore
-        let text= newPostElement.current.value
+        let text = newPostElement.current.value
         props.updateNewPostText(text)
 
     }
 
-    let postsElements = props.posts.map(element => <Post post={element}/>)
-    return (
 
+    return (
 
         <div className={classes.descriptionBlock}>
             <h3>MY POSTS</h3>
@@ -45,8 +41,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 <div>
                     <button onClick={onAddPost}>add post</button>
                 </div>
-                <div>
-                    <button>remove</button>
+               <div>
                 </div>
 
 

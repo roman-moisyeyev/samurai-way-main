@@ -1,6 +1,3 @@
-import {DialogPageType} from "./store";
-
-
 
 
 
@@ -13,7 +10,10 @@ type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
 export type  DialogsReducerType= SendMessageType|UpdateNewMessageBodyType
 
 
-let initialState = {dialogs: [{id: 1, name: "Roman"}, {id: 2, name: "Oleg"}, {id: 3, name: "Igor"},
+
+let initialState = {
+    dialogs: [
+        {id: 1, name: "Roman"}, {id: 2, name: "Oleg"}, {id: 3, name: "Igor"},
         {id: 4, name: "Vitaliy"},
         {id: 5, name: "Sergey"},
         {id: 6, name: "Aleksandr"},],
@@ -27,15 +27,17 @@ let initialState = {dialogs: [{id: 1, name: "Roman"}, {id: 2, name: "Oleg"}, {id
 
 export const dialogsReducer = (state=initialState, action: DialogsReducerType) => {
 
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body
-            return state;
+           return{...state,newMessageBody:action.body
+           }
+
+
         case SEND_MESSAGE:
-            let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({id: 6, message: body})
-            return state;
+            let body=state.newMessageBody
+         return {...state,newMessageBody:'',messages: [...state.messages,{id:6,message:body}]
+            }
         default:
             return state
     }
