@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
-import {Dialogs} from "../Dialogs";
-import {sendMessageAC, updateNewMessageBodyAC} from "../../../redux/dialogs-reducer";
+import {Dialogs} from "./Dialogs";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 
 
