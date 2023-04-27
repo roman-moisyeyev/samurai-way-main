@@ -1,46 +1,27 @@
 import React from "react";
 import  styles from './users.module.css'
+import {UsersPropsType} from "./UsersContainer";
+import userPhoto from '../../assets/images/users.png'
+import { UserType } from "../../redux/users-reducer";
 
-export const Users = (props: any) => {
+import axios from "axios";
 
-    if(props.users.length===0){
-        props.setUsers([
-            {
-                id: 1,
-                photoURL:'http://surl.li/gnxbq',
-                followed: false,
-                fullName: "Roman",
-                status: 'I am happy!',
-                location: {city: 'Kharkiv', country: 'Ukraine'}
-            },
-            {
-                id: 2,
-                photoURL:'http://surl.li/gnxbq',
-                followed: true,
-                fullName: "Oleg",
-                status: 'I am elephant',
-                location: {city: 'Bogodukhiv', country: 'Ukraine'}
-            },
-            {
-                id: 3,
-                photoURL:'http://surl.li/gnxbq',
-                followed: false,
-                fullName: "Grisha",
-                status: 'I am clever',
-                location: {city: 'Kyiv', country: 'Ukraine'}
-            },
-
-        ])
+export const Users = (props: UsersPropsType) => {
+let getUsers=()=>{
+    if (props.usersPage.users.length === 0) {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: { data: { items: UserType[]; }; })=>{
+            props.setUsers(response.data.items)})
     }
+}
+
     return (
+
         <div>
-            {props.users.map((u: {
-                followed: any;
-                id: React.Key | null | undefined; photoURL: string | undefined; fullName: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; status: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; location: { country: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; city: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }; }) => <div key={u.id}>
+
+            <button onClick={getUsers}>get users</button>
+            {props.usersPage.users.map(u => <div key={u.id}>
                 <span>
-                    <div>
-                    <img src={u.photoURL} className={styles.userPhoto}/>
-                </div>
+                    <div>< img src={u.photos.small !=null ? u.photos.small :userPhoto} className={styles.userPhoto}  alt="user photo"/></div>
                     <div>
                         {u.followed?
                             <button onClick={()=>{props.follow(u.id)}}>FOLLOW</button>
@@ -50,15 +31,16 @@ export const Users = (props: any) => {
                 </span>
                 <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{'u.location.country'}</div>
+                        <div>{'u.location.city'}</div>
                     </span>
                 </span>
-            </div>)}
+            </div>)
+            }
         </div>
     )
 }

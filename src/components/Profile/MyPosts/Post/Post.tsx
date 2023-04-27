@@ -1,23 +1,19 @@
 import React from "react";
 import classes from './Post.module.css'
-import {PostType} from "../../../../redux/1store";
-
-type PostPropsType = {
-   post:PostType
-}
+import {PostType} from "../../../../redux/profile-reducer";
 
 
-export const Post = (props:PostPropsType) => {
+export const Post = (props:PostType) => {
 
     return (
         <div>
-            <div className={classes.item} key={props.post.id}>
+            <div className={classes.item} key={props.id}>
                 <img
-                    src="https://media.gettyimages.com/id/1227618801/vector/human-face-avatar-icon-profile-for-social-network-man-vector-illustration.jpg?s=2048x2048&w=gi&k=20&c=a8O0jXGeYVFI9TCguB1f-7sFDsinMVJnoEpbEg4yhvY="
+                    src='http://surl.li/goegx'
                     alt="avatar logo"/>
-                {props.post.message}
             </div>
-            <div>{` like:${props.post.likeCount}`}</div>
+            <div>{props.message}</div>
+            <div>{` like:${props.likeCount}`}</div>
         </div>
 
 

@@ -1,24 +1,18 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import classes from './MyPosts.module.css'
-import {ActionsTypes, PostType} from "../../../redux/1store";
+import {MyPostPropsType} from "./MyPostsContainer";
 
 
-type MyPostsPropsType = {
-    posts: PostType[]
-    newPostText: string
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-}
 
+export const MyPosts = (props: MyPostPropsType) => {
 
-export const MyPosts = (props: MyPostsPropsType) => {
-
-    let postsElements = props.posts.map(p => <Post post={p} key={p.id}/>)
+    let postsElements = props.profilePage.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount} />)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const onAddPost = () => {
+
         props.addPost()
     }
 
@@ -36,7 +30,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
         <div className={classes.descriptionBlock}>
             <h3>MY POSTS</h3>
             <div>
-                <div><textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}
+                <div><textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={onPostChange}
                                placeholder='Enter your post'/></div>
                 <div>
                     <button onClick={onAddPost}>add post</button>
