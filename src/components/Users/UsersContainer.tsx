@@ -10,7 +10,8 @@ import {
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
-import Users from "./Users";
+import UsersAPIComponent from "./UsersAPIComponent";
+
 
 
 type MapStatePropsType = {
@@ -26,10 +27,10 @@ type MapDispatchPropsType = {
     setCurrentPage:(pageNumber:number)=>void
     setTotalUsersCount:(totalCount:number)=>void
 }
-
 export type UsersPropsType= MapStatePropsType&MapDispatchPropsType
 
-const mapStateToProps = (state: AppStateType): { usersPage: InitialStateType; totalUsersCount: number; pageSize: number; currentPage: number } => {
+
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: state.usersPage,
         pageSize:state.usersPage.pageSize,
@@ -37,8 +38,7 @@ const mapStateToProps = (state: AppStateType): { usersPage: InitialStateType; to
         currentPage:state.usersPage.currentPage
     }
 }
-
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         follow: (userId: number) => {
             dispatch(followAC(userId))
@@ -57,5 +57,5 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         }
     }
 }
-// @ts-ignore
-export const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(Users)
+
+export default connect(mapStateToProps,mapDispatchToProps)(UsersAPIComponent)
