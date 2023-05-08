@@ -2,3 +2,8 @@
     width: 65px;
     height: 66px;
 }
+
+.selectedPage{
+    font-weight: bold;
+    text-decoration:underline;
+}

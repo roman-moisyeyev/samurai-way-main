@@ -64,3 +64,6 @@ export const sendMessageAC = () => {
 export const updateNewMessageBodyAC = (body: string) => {
     return {type: "UPDATE-NEW-MESSAGE-BODY", body: body} as const
 }
+
+
+//delay(1000).then(() => console.log(‘resolve’)
