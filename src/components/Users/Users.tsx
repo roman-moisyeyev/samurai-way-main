@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/users.png";
-import {InitialStateType, UserType} from "../../redux/users-reducer";
-import {UsersPropsType} from "./UsersContainer";
+import {UserType} from "../../redux/users-reducer";
 
-type Users1PropsType={
+
+type UsersPropsType={
     totalUsersCount:number
     pageSize:number
     currentPage:number
@@ -13,7 +13,7 @@ type Users1PropsType={
     unFollow: (userId: number) => void
     users: Array<UserType>
 }
-let Users =(props:Users1PropsType)=>{
+let Users =(props:UsersPropsType)=>{
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = [];
@@ -28,7 +28,7 @@ let Users =(props:Users1PropsType)=>{
                 {pages.map(p => {
                     // @ts-ignore
                     return <span className={props.currentPage === p && styles.selectedPage}
-                                 onClick={(e) => {
+                                 onClick={() => {
                                      props.onPageChanged(p)
                                  }}> {p} </span>
                 })}
