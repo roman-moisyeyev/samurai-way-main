@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/users.png";
 import {UserType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 
 type UsersPropsType={
@@ -37,8 +38,13 @@ let Users =(props:UsersPropsType)=>{
             {props.users.map((u: { id: React.Key | null | undefined; photos: { small: string | null | undefined; }; followed: any; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; status: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }) =>
                 <div key={u.id}>
                 <span>
-                    <div>< img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}
-                               alt="user photo"/></div>
+                    <div>
+                        <NavLink to={'/profile/'+u.id}>
+                            < img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}
+                                  alt="user photo"/>
+                        </NavLink>
+
+                    </div>
                     <div>
                         {u.followed ?
                             <button onClick={() => { // @ts-ignore
